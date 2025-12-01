@@ -1,14 +1,12 @@
-package org.example.roundrobin;
+package org.example;
 
-import org.example.Process;
-
-public class RoundRobinProcessClass {
+public class Statistics {
     private Process process;
     private int endingTime;
     private int waitingTime;
     private int originalTime;
 
-    public RoundRobinProcessClass() {
+    public Statistics() {
     }
 
     public Process getProcess() {

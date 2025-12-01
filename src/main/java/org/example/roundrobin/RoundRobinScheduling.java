@@ -2,6 +2,7 @@ package org.example.roundrobin;
 
 import org.example.Process;
 import org.example.SchedulingInterface;
+import org.example.Statistics;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -13,13 +14,16 @@ public class RoundRobinScheduling implements SchedulingInterface {
     private int COUNT_OF_PROCESSES;
     private LinkedList<Process> queue = new LinkedList<>();
     private int time = 0;
-    private RoundRobinProcessClass[] roundRobinProcessClass;
+    private Statistics[] statistics;
 
     public RoundRobinScheduling(List<Process> list) {
         this.list = list;
         this.COUNT_OF_PROCESSES = list.size();
-        roundRobinProcessClass = new RoundRobinProcessClass[COUNT_OF_PROCESSES];
-        for (int i = 0; i < COUNT_OF_PROCESSES; i++) {roundRobinProcessClass[i] = new RoundRobinProcessClass();roundRobinProcessClass[i].setOriginalTime(list.get(i).getProcessTime());}
+        statistics = new Statistics[COUNT_OF_PROCESSES];
+        for (int i = 0; i < COUNT_OF_PROCESSES; i++) {
+            statistics[i] = new Statistics();
+            statistics[i].setOriginalTime(list.get(i).getProcessTime());
+        }
     }
     @Override
     public Process getNextProcess(int currentProcessId) {
@@ -55,9 +59,9 @@ public class RoundRobinScheduling implements SchedulingInterface {
         if (process.getProcessTime() <= ROUND) {
             time += process.getProcessTime();
             deleteProcess(process);
-            roundRobinProcessClass[process.getId()].setProcess(process);
-            roundRobinProcessClass[process.getId()].setEndingTime(time);
-            roundRobinProcessClass[process.getId()].setWaitingTime( time - process.getStartTime() - roundRobinProcessClass[process.getId()].getOriginalTime());
+            statistics[process.getId()].setProcess(process);
+            statistics[process.getId()].setEndingTime(time);
+            statistics[process.getId()].setWaitingTime( time - process.getStartTime() - statistics[process.getId()].getOriginalTime());
         } else {
             time += ROUND;
             int newTime = process.getProcessTime() - ROUND;
@@ -65,5 +69,5 @@ public class RoundRobinScheduling implements SchedulingInterface {
             queue.remove(process);
         }
     }
-    public RoundRobinProcessClass[] getStatistics() { return roundRobinProcessClass; }
+    public Statistics[] getStatistics() { return statistics; }
 }

@@ -2,6 +2,7 @@ package org.example.roundrobin;
 
 import org.example.Process;
 import org.example.SchedulingAlgorithm;
+import org.example.Statistics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +26,9 @@ public class RoundRobinAlgorithm extends SchedulingAlgorithm {
         return result;
     }
     public void printStatistics(){
-        RoundRobinProcessClass[] arr = roundRobinScheduling.getStatistics();
+        Statistics[] arr = roundRobinScheduling.getStatistics();
         System.out.println("--- Round Robin Statistics ---");
-        for (RoundRobinProcessClass ele:arr){
+        for (Statistics ele:arr){
             System.out.println("\t\t" + ele.toString());
         }
         System.out.println("-- Ending Round Robin Statistics --");
