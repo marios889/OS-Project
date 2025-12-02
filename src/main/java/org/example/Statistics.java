@@ -1,6 +1,7 @@
 package org.example;
 
 public class Statistics {
+
     private Process process;
     private int endingTime;
     private int waitingTime;
@@ -37,13 +38,15 @@ public class Statistics {
         return originalTime;
     }
 
-    public void setOriginalTime(int originalTime) {this.originalTime = originalTime;}
+    public void setOriginalTime(int originalTime) {
+        this.originalTime = originalTime;
+    }
 
     @Override
     public String toString() {
-        return "Process ID: " + process.getId() +
-                ", Ending Time: " + endingTime +
-                ", Waiting Time: " + waitingTime +
-                ", Original Time: " + originalTime;
+        return "Process ID: " + process.getId()
+                + ", Ending Time: " + endingTime
+                + ", Waiting Time: " + waitingTime
+                + ", Original Time: " + originalTime;
     }
 }

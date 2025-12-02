@@ -87,7 +87,7 @@ public class ShortestRemainingTimeScheduling implements SchedulingInterface {
         // run for one time unit
         int remaining = process.getProcessTime() - 1;
         process.setDuration(Math.max(0, remaining));
-        currentTime++; // time passes
+        currentTime++;
 
         if (process.getProcessTime() <= 0) {
             process.setFinished();
@@ -99,9 +99,6 @@ public class ShortestRemainingTimeScheduling implements SchedulingInterface {
             int waiting = s.getEndingTime() - process.getStartTime() - s.getOriginalTime();
             s.setWaitingTime(waiting);
             statistics.add(s);
-            // keep or remove from list; mark finished already
-            // optionally remove from active list to speed up searches:
-            // processList.remove(process);
         }
     }
 
