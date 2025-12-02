@@ -18,7 +18,6 @@ public class ShortestRemainingTimeAlgorithm extends SchedulingAlgorithm {
 
     @Override
     public List<String> run(List<Process> processList) {
-        // if run is called with a different list, recreate scheduler
         if (scheduler == null || scheduler.getProcessList().size() != processList.size()) {
             this.scheduler = new ShortestRemainingTimeScheduling(processList);
         }

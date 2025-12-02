@@ -22,16 +22,15 @@ public class ShortestRemainingTimeScheduling implements SchedulingInterface {
     }
 
     public ShortestRemainingTimeScheduling(List<Process> processes) {
-        // keep a local list reference so we can mark finished/remove
         this.processList = new LinkedList<>(processes);
         for (Process p : processes) {
-            originalDurations.put(p.getId(), p.getProcessTime());
+            originalDurations.put(p.getId(), p.getProcessTime()); // store original durations
         }
     }
 
     @Override
     public Process getNextProcess(int currentProcessId) {
-        // choose shortest remaining among arrived and not finished
+        // choose shortest remaining from arrived and not finished
         Process best = findShortestReady();
         if (best != null) {
             return best;
