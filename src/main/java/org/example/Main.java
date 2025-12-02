@@ -3,7 +3,7 @@ package org.example;
 import org.example.FirstComeFirstServe.FirstComeFirstServeAlgorithm;
 import org.example.roundrobin.RoundRobinAlgorithm;
 import org.example.sjf.SJFAlgorithm;
-import org.example.PriorityScheduling.PrioritySchedulingAlgorithm;
+import org.example.ShortestRemainingTime.ShortestRemainingTimeAlgorithm;
 
 import java.util.List;
 import java.util.Scanner;
@@ -36,7 +36,7 @@ public class Main {
                 result = schedulingAlgorithm.run(processList);
                 break;
             case 5:
-                schedulingAlgorithm = new PrioritySchedulingAlgorithm(processList);
+                schedulingAlgorithm = new ShortestRemainingTimeAlgorithm(processList);
                 result = schedulingAlgorithm.run(processList);
                 break;
             default:

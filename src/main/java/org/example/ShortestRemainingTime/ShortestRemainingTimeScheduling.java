@@ -1,4 +1,4 @@
-package org.example.PriorityScheduling;
+package org.example.ShortestRemainingTime;
 
 import org.example.Process;
 import org.example.SchedulingInterface;
@@ -7,9 +7,10 @@ import org.example.Statistics;
 import java.util.LinkedList;
 import java.util.List;
 
-public class PriorityScheduling implements SchedulingInterface {
+public class ShortestRemainingTimeScheduling implements SchedulingInterface {
 
-    public PriorityScheduling() {
+    public ShortestRemainingTimeScheduling() {
+
     }
 
     @Override

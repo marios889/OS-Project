@@ -1,4 +1,4 @@
-package org.example.PriorityScheduling;
+package org.example.ShortestRemainingTime;
 
 import org.example.Process;
 import org.example.SchedulingAlgorithm;
@@ -7,9 +7,9 @@ import org.example.Statistics;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrioritySchedulingAlgorithm extends SchedulingAlgorithm {
+public class ShortestRemainingTimeAlgorithm extends SchedulingAlgorithm {
 
-    public PrioritySchedulingAlgorithm(List<Process> processList) {
+    public ShortestRemainingTimeAlgorithm(List<Process> processList) {
 
     }
 
