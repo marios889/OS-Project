@@ -51,6 +51,8 @@ public class Statistics {
         
         if (!process.getProcessType().equals("general")) {
             result += ", Process Type: " + process.getProcessType();
+        } else if (process.getPriority() == -1) {
+            result += ", Process Priority" + process.getPriority();
         }
 
         return result;

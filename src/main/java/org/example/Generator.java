@@ -11,13 +11,23 @@ import java.util.Random;
  */
 public class Generator {
     private List<Process> list;
-    private List<Process> generate (int num) {
+    private List<Process> generate (int num, boolean priority) {
         list = new ArrayList<>();
         Random random = new Random(124);
+        if (priority) {
         for (int i = 0; i < num; i++) {
-            Process process = new Process(random.nextInt(10) + 2, random.nextInt(5) + 1);
-            list.add(process);
+                Process process = new Process(random.nextInt(10) + 2, random.nextInt(5) + 1, random.nextInt(3) + 1);
+                list.add(process);
+            }
         }
+
+        else {
+            for (int i = 0; i < num; i++) {
+                Process process = new Process(random.nextInt(10) + 2, random.nextInt(5) + 1);
+                list.add(process);
+            }
+        }
+        
         list.forEach(process -> System.out.println(process.toString()));
         return list;
     }
@@ -36,9 +46,9 @@ public class Generator {
         return list;
     }
 
-    public List<Process> getProcessList(boolean MultiLevel) {
+    public List<Process> getProcessList(boolean MultiLevel, boolean priority) {
         if (list == null) {
-            if (!MultiLevel) list = generate(5);
+            if (!MultiLevel) list = generate(5, priority);
             else list = generateProcesseswithTypes(5);
         }
         return clone(list);
