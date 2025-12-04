@@ -19,7 +19,7 @@ import java.util.List;
  * >> Interactive queue has a higher priority than system queue
  */
 
-public class MultiLevelScheduling extends SchedulingAlgorithm{
+public class MultiLevelScheduling implements SchedulingInterface {
     private final List<Process> processesList;
     private LinkedList<Process> interactiveQueue;
     private LinkedList<Process> systemQueue;
@@ -134,8 +134,8 @@ public class MultiLevelScheduling extends SchedulingAlgorithm{
 
     private void update_statistics(Process process, int time) {
         statistics[process.getId()].setProcess(process);
-        statistics[process.getID()].setEndingTime(time);
-        statistics[process.getID()].setWaitingTime(time - statistics[process.getId()].getOriginalTime() - process.getStartTime());
+        statistics[process.getId()].setEndingTime(time);
+        statistics[process.getId()].setWaitingTime(time - statistics[process.getId()].getOriginalTime() - process.getStartTime());
     }
 
     // ----------------------------------------------------------------------------------------

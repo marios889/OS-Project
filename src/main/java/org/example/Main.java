@@ -18,6 +18,7 @@ public class Main {
         List<Process> processList = generator.getProcessList();
         SchedulingAlgorithm schedulingAlgorithm;
         List<String> result;
+        System.out.println("-".repeat(100));
         switch (input.nextInt()) {
             case 1:
                 ///  put your code here.
@@ -39,9 +40,12 @@ public class Main {
                 result = schedulingAlgorithm.run(processList);
                 break;
 
-            case 5:
+            // case 5: 
+
+            case 6:
                 schedulingAlgorithm = new MultiLevelAlgorithm(processList);
                 result = schedulingAlgorithm.run(processList);
+                break;
 
             // case i 
                 ///  put your code here.
