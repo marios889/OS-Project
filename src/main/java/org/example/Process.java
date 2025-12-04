@@ -1,18 +1,29 @@
 package org.example;
 
-public class Process {
 
+public class Process {
+    
     private static int counter = 0;
     private int id;
     private int duration;
     private int startTime;
     private boolean finished;
 
+    private String processType;  // For multilevel scheduling
+    public static final String SYSTEM = "system";
+    public static final String INTERACTIVE = "interactive";
+ 
     public Process(int time, int startTime) {
         this.id = counter++;
         this.duration = time;
         this.startTime = startTime;
         this.finished = false;
+        this.processType = SYSTEM;
+    }
+
+    public Process(int time, int startTime, String type) {
+        this(time, startTime);
+        this.processType = type;
     }
 
     public int getProcessTime() {
@@ -39,7 +50,16 @@ public class Process {
         return this.startTime;
     }
 
+    public void setProcessType(String type) {
+        this.processType = type;
+    }
+
+    public String getProcessType() {
+        return this.processType;
+    }
+
     public String toString() {
         return "id = " + this.id + ", duration = " + this.duration + ", startTime = " + this.startTime;
     }
+    
 }

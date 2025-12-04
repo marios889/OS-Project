@@ -4,6 +4,7 @@ import org.example.FirstComeFirstServe.FirstComeFirstServeAlgorithm;
 import org.example.roundrobin.RoundRobinAlgorithm;
 import org.example.sjf.SJFAlgorithm;
 import org.example.ShortestRemainingTime.ShortestRemainingTimeAlgorithm;
+import org.example.MultiLevel.MultiLevelAlgorithm;
 
 import java.util.List;
 import java.util.Scanner;
@@ -34,11 +35,18 @@ public class Main {
                 result = schedulingAlgorithm.run(processList);
                 break;
             case 4:
-                ///  put your code here.
-                ///  Naming Convention -> (Algorithm name)List, (Algorithm name)Result
                 schedulingAlgorithm = new RoundRobinAlgorithm(processList);
                 result = schedulingAlgorithm.run(processList);
                 break;
+
+            case 5:
+                schedulingAlgorithm = new MultiLevelAlgorithm(processList);
+                result = schedulingAlgorithm.run(processList);
+
+            // case i 
+                ///  put your code here.
+                ///  Naming Convention -> (Algorithm name)List, (Algorithm name)
+
             default:
                 System.out.println("Please, Enter a valid input");
                 return;

@@ -13,6 +13,7 @@ public class FirstComeFirstServeScheduling implements SchedulingInterface {
     private LinkedList<Process> queue = new LinkedList<>();
     private int time = 0;
     private Statistics[] statistics;
+    
 
     public FirstComeFirstServeScheduling(List<Process> list) {
         this.list = list;
