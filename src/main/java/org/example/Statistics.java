@@ -52,7 +52,7 @@ public class Statistics {
         if (!process.getProcessType().equals("general")) {
             result += ", Process Type: " + process.getProcessType();
         }
-        
+
         return result;
     }
 }

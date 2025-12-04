@@ -9,6 +9,9 @@ import java.util.List;
 
 public class MultiLevelFeedbackAlgorithm extends SchedulingAlgorithm {
     private static final int RSEET_TIME = 10;
+    private static final int PRIORITY_0 = 0;
+    private static final int PRIORITY_1 = 1;
+    private static final int PRIORITY_2 = 2;
 
     MultiLevelFeedbackScheduling multiLevelFeedbackScheduling;
     public MultiLevelFeedbackAlgorithm(List<Process> list) {
@@ -23,19 +26,33 @@ public class MultiLevelFeedbackAlgorithm extends SchedulingAlgorithm {
         Process process = multiLevelFeedbackScheduling.getNextProcess(0);
 
         while(process != null) {
+            // If another process came while this is running
+            // multiLevelFeedbackScheduling.enqueueProcessesUpToCurrentTime();
+
             int currentTime = multiLevelFeedbackScheduling.getCurrentTime();
 
             // Reset priorities each RESRT_TIME
             if (currentTime % RSEET_TIME == 0 && currentTime != 0) {
                 multiLevelFeedbackScheduling.promoteAllProcesses();
+                result.add("-- Resetting Priorities --");
             }
 
+
+            int priorityMLF = process.getPriorityMLF();
+            String queue = "";
+            if (priorityMLF == PRIORITY_0) {queue = "Queue0";}
+            else if (priorityMLF == PRIORITY_1) {queue = "Queue1";}
+            else if (priorityMLF == PRIORITY_2) {queue = "Queue2";}
+
+            // Update Output
             String outputLine = String.format(
-                "\t\t" + "[current time = %d] process %d is running, process type: %s",
+                "\t\t" + "[current time = %d] process %d is running, process type: %s, from queue: %s",
                 multiLevelFeedbackScheduling.getCurrentTime(),
                 process.getId(),
-                process.getProcessType()
+                process.getProcessType(),
+                queue
             );
+
             result.add(outputLine);
 
             multiLevelFeedbackScheduling.updateDuration(process);

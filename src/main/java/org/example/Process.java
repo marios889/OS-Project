@@ -13,8 +13,9 @@ public class Process {
     public static final String SYSTEM = "system";
     public static final String INTERACTIVE = "interactive";
 
-    // For multiLevelFeedback
-    private int priority = 0;
+    // For multiLevelFeedback (MLF)
+    private int priorityMLF = 0;
+    private static final int NO_MLF_PROCESS = -1;
  
     public Process(int time, int startTime) {
         this.id = counter++;
@@ -22,6 +23,7 @@ public class Process {
         this.startTime = startTime;
         this.finished = false;
         this.processType = "general";
+        this.priorityMLF = NO_MLF_PROCESS;
     }
 
     public Process(int time, int startTime, String type) {
@@ -61,12 +63,13 @@ public class Process {
         return this.processType;
     }
 
-    public int getPriority() {
-        return this.priority;
+    // For MultiLevelFeedback (MLF)
+    public int getPriorityMLF() {
+        return this.priorityMLF;
     }
 
-    public void setPriority(int p) {
-        this.priority = p;
+    public void setPriorityMLF(int p) {
+        this.priorityMLF = p;
     } 
 
     public String toString() {

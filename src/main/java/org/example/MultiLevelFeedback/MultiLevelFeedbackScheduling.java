@@ -17,9 +17,9 @@ import java.util.List;
  * If a process marked as higher priority, it remains in its queue (or promoted to the next high-level queue) "Promotion".
  * 
  * Assume, we have 3 queues:-
- * - First is Round Robin  -> Priority_0 (Round = 2)
- * - Second is Round Robin -> Priority_1 (Round = 3)
- * - Third is FCFS         -> Priority_2
+ * - First is Round Robin  -> PRIORITY_0 (Round = 2)
+ * - Second is Round Robin -> PRIORITY_1 (Round = 3)
+ * - Third is FCFS         -> PRIORITY_2
  * 
  * When a Demotion happens?
  * - If a process has a very long time (System Process) -> It is demoted to the next low-level
@@ -39,9 +39,9 @@ public class MultiLevelFeedbackScheduling implements SchedulingInterface {
     private int countOfProcesses;
     private static final int ROUND_0 = 2;
     private static final int ROUND_1 = 3;
-    private static final int Priority_0 = 0;
-    private static final int Priority_1 = 1;
-    private static final int Priority_2 = 2;
+    private static final int PRIORITY_0 = 0;
+    private static final int PRIORITY_1 = 1;
+    private static final int PRIORITY_2 = 2;
     public static final String INTERACTIVE = "interactive";
 
     // ----------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ public class MultiLevelFeedbackScheduling implements SchedulingInterface {
         return null;
     }
 
-    private void enqueueProcessesUpToCurrentTime() {
+    public void enqueueProcessesUpToCurrentTime() {
         for (Process process : processesList) {
             if (
                 process.getStartTime() <= time 
@@ -89,6 +89,7 @@ public class MultiLevelFeedbackScheduling implements SchedulingInterface {
                 && !Queue2.contains(process) 
                 && !process.isFinished()
             ) {
+                process.setPriorityMLF(PRIORITY_0);
                 Queue0.add(process);
             }
         }
@@ -118,9 +119,9 @@ public class MultiLevelFeedbackScheduling implements SchedulingInterface {
     public void updateDuration(Process process) {
         String processType = process.getProcessType();
         int processDuration = process.getProcessTime();
-        int processPriority = process.getPriority();
+        int processPriority = process.getPriorityMLF();
 
-        if (processPriority == Priority_0) {
+        if (processPriority == PRIORITY_0) {
             // Took last round
             if (processDuration <= ROUND_0) {
                 time += processDuration;
@@ -138,12 +139,12 @@ public class MultiLevelFeedbackScheduling implements SchedulingInterface {
                     Queue0.add(process);
                 } else {  // Else -> Demote it
                     Queue1.add(process);
-                    process.setPriority(Priority_1);
+                    process.setPriorityMLF(PRIORITY_1);
                 }
             }
         }
 
-        else if (processPriority == Priority_1) {
+        else if (processPriority == PRIORITY_1) {
             if (processDuration <= ROUND_1) {
                 time += processDuration;
                 deleteProcess(process);
@@ -155,7 +156,7 @@ public class MultiLevelFeedbackScheduling implements SchedulingInterface {
                 process.setDuration(processDuration - ROUND_1);
                 time += ROUND_1;
                 Queue2.add(process);
-                process.setPriority(Priority_2);
+                process.setPriorityMLF(PRIORITY_2);
             }
         }
 
@@ -173,7 +174,7 @@ public class MultiLevelFeedbackScheduling implements SchedulingInterface {
         for (Process process : processesList) {
             if (!process.isFinished()) {
                 // Reset Priorities
-                process.setPriority(Priority_0); 
+                process.setPriorityMLF(PRIORITY_0); 
 
                 // Promote processes
                 if (Queue1.contains(process)) {
